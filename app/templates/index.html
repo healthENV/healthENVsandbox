@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="app-page-heading">
+  Spin up an environment
+</h1>
+
+<p class="nhsuk-lede-text app-lede-text">
+  Build consistent, accessible user interfaces. Learn from the research and experience of other NHS digital teams.
+</p>
+
+<div class="nhsuk-form-group">
+  <label class="nhsuk-label" for="select-1">
+      Use the tools below to start up a new environment
+  </label>
+  <select class="nhsuk-select" id="select-1" name="select-1" hx-get="/envSelected" hx-swap="outerHTML" hx-include="[id='select-1']">
+    <option value="1">...</option>
+    <option value="1">Health stack all open source</option>
+    <option value="2">Health stack Bahmi</option>
+    <option value="3">Health stack Better.care</option>
+  </select>
+</div>
+
+<label class="nhsuk-label" for="select-1">
+  Use the link below to start up a new command line:
+</label>
+
+<p><a href="url">Command line</a></p>
+
+
+<div class="nhsuk-label" hx-get="/messages">
+  Put To Messages
+</div>
+
+{% endblock %}

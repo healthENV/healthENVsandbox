@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  env3:
+    build: .
+    container_name: env3
+    volumes:
+      - ../../dockerfiles:/dockerfiles
+    networks:
+      - app-network
+    command:
+      sh -c "while true; do moo; sleep 2; done"
+  env4:
+    build: .
+    container_name: env4
+    volumes:
+      - ../../dockerfiles:/dockerfiles
+    networks:
+      - app-network
+    command:
+      sh -c "while true; do moo; sleep 2; done"
+
+networks:
+  app-network:
+    driver: bridge

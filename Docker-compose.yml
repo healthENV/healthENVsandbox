@@ -1,11 +1,36 @@
 version: "3.9"
 services:
-  hub:
-    image: tiangolo/uvicorn-gunicorn-starlette:python3.7
-    container_name: hub
+  portal:
+    build: ./dockerfiles_main/portal
+    container_name: portal
     #restart: unless-stopped
-    env_file: .env
+    #env_file: .env
     ports:
       - "9999:80"
     volumes:
       - ./app:/app
+      - ./dockerfiles:/dockerfiles
+      - ./ipc:/ipc
+    networks:
+      - app-network
+    command: >
+      sh -c "uvicorn app:app --reload --host 0.0.0.0 --port 80"
+  launcher:
+    build: ./dockerfiles_main/launcher
+    container_name: launcher
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./dockerfiles:/dockerfiles
+      - ./launcher:/launcher
+      - ./ipc:/ipc
+    networks:
+      - app-network
+    depends_on:
+      - portal
+    command: >
+      sh -c "python ./launcher/launcher.py"
+      #sh -c "while true; do sleep 1; done"
+
+networks:
+  app-network:
+    driver: bridge

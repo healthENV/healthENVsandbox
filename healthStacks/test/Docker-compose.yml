@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  unix:
+    image: ubuntu:20.04
+    container_name: unix
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      sh -c "while true; do foo; sleep 2; done"
+

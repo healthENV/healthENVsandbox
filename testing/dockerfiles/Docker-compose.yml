@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  ENV1:
+    image: ubuntu:20.04
+    container_name: ENV1
+    command:
+      sh -c "while true; do moo; sleep 2; done"
