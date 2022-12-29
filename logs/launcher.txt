@@ -1,0 +1,38 @@
+29/12/2022 11:43:27 - Launcher start up
+29/12/2022 11:43:37 - Closing down routine
+29/12/2022 11:44:04 - Launcher start up
+29/12/2022 11:44:10 - Closing down routine
+29/12/2022 11:57:07 - Launcher start up
+29/12/2022 11:58:48 - Closing down routine
+29/12/2022 12:07:52 - Launcher start up
+29/12/2022 12:08:20 - Closing down routine
+29/12/2022 12:09:36 - Launcher start up
+29/12/2022 12:09:42 - Closing down routine
+29/12/2022 12:10:47 - Launcher start up
+29/12/2022 12:13:10 - Closing down routine
+29/12/2022 12:13:36 - Launcher start up
+29/12/2022 12:13:52 - Closing down routine
+29/12/2022 12:16:15 - Launcher start up
+29/12/2022 12:16:33 - Closing down routine
+29/12/2022 12:19:43 - Launcher start up
+29/12/2022 12:20:15 - Closing down routine
+29/12/2022 12:22:13 - Launcher start up
+29/12/2022 12:23:00 - Closing down routine
+29/12/2022 12:28:11 - Launcher start up
+29/12/2022 12:28:32 - Closing down routine
+29/12/2022 12:38:05 - Launcher start up
+29/12/2022 12:40:24 - Closing down routine...
+29/12/2022 12:40:24 - Closing containers at: /dockerfiles/ENV2
+29/12/2022 12:45:42 - Launcher start up
+29/12/2022 12:50:32 - Launcher start up
+29/12/2022 12:51:13 - Closing down routine...
+29/12/2022 12:52:06 - Launcher start up
+29/12/2022 12:53:07 - Closing down routine...
+29/12/2022 12:53:07 - Closing containers at: /dockerfiles/ENV2
+29/12/2022 12:54:12 - Launcher start up
+29/12/2022 12:55:14 - Closing down routine...
+29/12/2022 12:55:14 - Closing containers at: /dockerfiles/ENV2
+29/12/2022 12:55:41 - Launcher start up
+29/12/2022 12:56:29 - Closing down routine...
+29/12/2022 12:56:29 - Closing containers at: /dockerfiles/ENV2
+29/12/2022 12:56:40 - Closing containers at: /dockerfiles/ENV2

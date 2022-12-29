@@ -29,7 +29,8 @@ async def envSelected(request):
     context = {"request": request}
     requestDic = vars(request)
     context["query_string"] = str(requestDic["scope"]["query_string"], 'UTF-8')[-1]
-    client_program()
+    launcherMsg = client_program('launch', 'start openEMR')
+    context['launcherMsg'] = launcherMsg
     return templates.TemplateResponse(template, context)
 
 async def error(request):

@@ -1,6 +1,7 @@
 import socket
+import json
 
-def client_program():
+def client_program(function, message):
     host = "launcher" #socket.gethostname()
     port = 5000  # socket server port number
     try:
@@ -10,10 +11,11 @@ def client_program():
         print("Seems that launcher is not running")
         return
     else:
-        message = "launch"
+        toSend = {function, message}
+        toSendJson = json.dumps(toSend)
 
-        client_socket.send(message.encode())  # send message
+        client_socket.send(toSendJson)  # send message
         data = client_socket.recv(1024).decode()  # receive response
         print(data)
         client_socket.close()  # close the connection
-        return
+        return data

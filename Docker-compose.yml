@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
   portal:
     build: ./dockerfiles_main/portal
@@ -11,25 +12,32 @@ services:
       - ./app:/app
       - ./dockerfiles:/dockerfiles
       - ./ipc:/ipc
+      - ./logs:/logs
     networks:
       - app-network
     command: >
       sh -c "uvicorn app:app --reload --host 0.0.0.0 --port 80"
+
+
   launcher:
     build: ./dockerfiles_main/launcher
     container_name: launcher
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./dockerfiles:/dockerfiles
-      - ./launcher:/launcher
       - ./ipc:/ipc
+      - ./launcher:/launcher
+      - ./logs:/logs
     networks:
       - app-network
+    # Need a prolonged grace stop period (normally 10 seconds) as otherwise the sibling containers to get closed in time
+    stop_grace_period: 1m
     depends_on:
       - portal
-    command: >
-      sh -c "python ./launcher/launcher.py"
-      #sh -c "while true; do sleep 1; done"
+    # use of entrypoint rather than command to make below function PID1, and can then handle SIGTERM appropriately (Linux treats PID1 a little different to other processes (harder to kill))
+    
+    entrypoint: sh -c "python ./launcher/launcher.py"
+
 
 networks:
   app-network:
