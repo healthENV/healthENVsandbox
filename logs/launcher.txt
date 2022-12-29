@@ -36,3 +36,50 @@
 29/12/2022 12:56:29 - Closing down routine...
 29/12/2022 12:56:29 - Closing containers at: /dockerfiles/ENV2
 29/12/2022 12:56:40 - Closing containers at: /dockerfiles/ENV2
+29/12/2022 13:15:29 - Launcher start up
+29/12/2022 13:21:31 - Launcher start up
+29/12/2022 13:22:21 - Launcher start up
+29/12/2022 13:24:50 - Closing down routine...
+29/12/2022 13:24:50 - Closing containers at: /dockerfiles/ENV2
+29/12/2022 14:06:23 - Launcher start up
+29/12/2022 14:06:37 - Message from portal: ['up', 'user1ENV1']
+29/12/2022 14:10:11 - Launcher start up
+29/12/2022 14:11:09 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 14:13:24 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 14:13:26 - Message from portal: ['down', 'user1', 'ENV1']
+29/12/2022 14:14:59 - Closing down routine...
+29/12/2022 14:14:59 - Closing containers at: /dockerfiles//user1/ENV1
+29/12/2022 14:15:24 - Launcher start up
+29/12/2022 14:15:32 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 14:15:38 - Message from portal: ['down', 'user1', 'ENV1']
+29/12/2022 14:18:24 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 14:18:32 - Message from portal: ['down', 'user1', 'ENV1']
+29/12/2022 14:18:53 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 14:19:49 - Closing down routine...
+29/12/2022 14:19:49 - Closing containers at: /dockerfiles//user1/ENV1
+29/12/2022 14:51:50 - Launcher start up
+29/12/2022 14:56:58 - Launcher start up
+29/12/2022 15:04:58 - Launcher start up
+29/12/2022 15:05:12 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 15:06:51 - Launcher start up
+29/12/2022 15:11:13 - Launcher start up
+29/12/2022 15:24:40 - Launcher start up
+29/12/2022 15:26:21 - Launcher start up
+29/12/2022 15:34:05 - Closing down routine...
+29/12/2022 15:37:38 - Launcher start up
+29/12/2022 15:38:21 - Launcher start up
+29/12/2022 15:45:56 - Launcher start up
+29/12/2022 15:53:48 - Launcher start up
+29/12/2022 15:55:37 - Launcher start up
+29/12/2022 15:56:08 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 15:56:50 - Message from portal: ['down', 'user1', 'ENV1']
+29/12/2022 15:57:07 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 15:57:25 - Message from portal: ['down', 'user1', 'ENV1']
+29/12/2022 15:57:39 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 15:57:53 - Message from portal: ['down', 'user1', 'ENV1']
+29/12/2022 16:00:33 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 16:01:05 - Message from portal: ['down', 'user1', 'ENV1']
+29/12/2022 16:02:57 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 16:03:17 - Message from portal: ['down', 'user1', 'ENV1']
+29/12/2022 16:04:37 - Message from portal: ['up', 'user1', 'ENV1']
+29/12/2022 16:06:15 - Message from portal: ['down', 'user1', 'ENV1']

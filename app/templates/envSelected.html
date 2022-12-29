@@ -1,3 +1,13 @@
-<p class="nhsuk-lede-text app-lede-text">
-    {{ launcherMsg }}
-</p>
+<div id="envBuilding">
+    <p class="nhsuk-lede-text app-lede-text">
+        {{ launcherMsg }}
+    </p>
+
+    <p class="nhsuk-label">
+        <a href="http://localhost:2080" target="_blank">Open new environment in new tab</a>
+    </p>
+
+    <button class="nhsuk-button" hx-get="/stopEnv" hx-trigger="click" hx-target="#envBuilding" hx-swap="outerHTML">
+        Stop enviroment!
+    </button>
+</div>

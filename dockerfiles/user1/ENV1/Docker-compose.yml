@@ -9,7 +9,7 @@ services:
     image: mariadb:10.6
     command: ['mysqld','--character-set-server=utf8mb4']
     volumes:
-    - databasevolume:/var/lib/mysql
+      - databasevolume:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
   openemr:
@@ -17,11 +17,11 @@ services:
     depends_on: mysql
     image: openemr/openemr:7.0.0
     ports:
-    - 1080:80
-    - 1443:443
+     - 2080:80
+     - 2443:443
     volumes:
-    - logvolume01:/var/log
-    - sitevolume:/var/www/localhost/htdocs/openemr/sites
+      - logvolume01:/var/log
+      - sitevolume:/var/www/localhost/htdocs/openemr/sites
     environment:
       MYSQL_HOST: mysql
       MYSQL_ROOT_PASS: root
@@ -30,8 +30,17 @@ services:
       OE_USER: admin
       OE_PASS: pass
     depends_on:
-    - mysql
+      - mysql
+#    networks:
+#      - envNetwork
+
 volumes:
   logvolume01: {}
   sitevolume: {}
   databasevolume: {}
+
+
+#networks:
+#  envNetwork:
+#    external: true
+#    name: envNetwork

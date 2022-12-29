@@ -7,7 +7,7 @@ services:
     #restart: unless-stopped
     #env_file: .env
     ports:
-      - "9999:80"
+      - "1080:80"
     volumes:
       - ./app:/app
       - ./dockerfiles:/dockerfiles
@@ -30,15 +30,36 @@ services:
       - ./logs:/logs
     networks:
       - app-network
+#      - envNetwork
     # Need a prolonged grace stop period (normally 10 seconds) as otherwise the sibling containers to get closed in time
     stop_grace_period: 1m
     depends_on:
       - portal
     # use of entrypoint rather than command to make below function PID1, and can then handle SIGTERM appropriately (Linux treats PID1 a little different to other processes (harder to kill))
-    
     entrypoint: sh -c "python ./launcher/launcher.py"
+
+
+#  webserver:
+#    depends_on:
+#      - portal
+#    image: nginx:1.15.12-alpine
+#    container_name: webserver
+#    restart: unless-stopped
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes:
+#      - ./nginx-conf:/etc/nginx/conf.d
+#    networks:
+#      - app-network
+#      - nginx-network
+#      - envNetwork
 
 
 networks:
   app-network:
     driver: bridge
+#  nginx-network:
+#    external: true
+#  envNetwork:
+#    name: envNetwork

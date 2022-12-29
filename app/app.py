@@ -29,9 +29,18 @@ async def envSelected(request):
     context = {"request": request}
     requestDic = vars(request)
     context["query_string"] = str(requestDic["scope"]["query_string"], 'UTF-8')[-1]
-    launcherMsg = client_program('launch', 'start openEMR')
+    launcherMsg = client_program('up', 'user1', 'ENV1')
     context['launcherMsg'] = launcherMsg
     return templates.TemplateResponse(template, context)
+
+
+async def stopEnv(request):
+    template = "stopEnv.html"
+    context = {"request": request}
+    launcherMsg = client_program('down', 'user1', 'ENV1')
+    context['launcherMsg'] = launcherMsg
+    return templates.TemplateResponse(template, context)
+
 
 async def error(request):
     """
@@ -62,6 +71,7 @@ routes = [
     Route('/', homepage),
     Route('/messages', messages),
     Route('/envSelected', envSelected),
+    Route('/stopEnv', stopEnv),
     Route('/error', error),
     Mount('/static', app=StaticFiles(directory='static'), name="static")
 ]
@@ -72,7 +82,8 @@ exception_handlers = {
 }
 
 app = Starlette(debug=True, routes=routes, exception_handlers=exception_handlers)
-#dd
 
+
+# Not currently used as cannot do reload with below method, only from command line
 if __name__ == "__main__":
     uvicorn.run(app, host='0.0.0.0', port=80)

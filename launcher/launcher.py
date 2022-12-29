@@ -3,7 +3,6 @@
 import threading
 import time as t
 import socket
-import docker
 import os
 import signal
 from datetime import datetime
@@ -17,10 +16,10 @@ logFile = "/logs/launcher.txt"
 
 
 runningENVs = []
-ENVLocation = "/dockerfiles/ENV2"
+mainEnvLocation = "/dockerfiles/"
 
 
-def date_Time(message):
+def logMsg(message):
     now = datetime.now()
     dateTime = now.strftime("%d/%m/%Y %H:%M:%S")
     print(f"{ dateTime } - { message }")
@@ -28,17 +27,17 @@ def date_Time(message):
     f.write(f"{ dateTime } - { message }\n")
     f.close()
 
-date_Time("Launcher start up")
+logMsg("Launcher start up")
 
 
 def handler_stop_signals(signum, frame):
     global runningENVs, exitFlag
-    date_Time("Closing down routine...")
+    logMsg("Closing down routine...")
 
     while len(runningENVs) != 0:
         location = runningENVs.pop()
         os.chdir(location)
-        date_Time(f"Closing containers at: { location }")
+        logMsg(f"Closing containers at: { location }")
         os.system('docker-compose down')
     #print(f"exit flag is: { exitFlag[0] }")
     exitFlag[0] = 1
@@ -81,17 +80,30 @@ def ipcThread(server_socket):
 
         while exitFlag[0] == 0:
             # receive data stream. it won't accept data packet greater than 1024 bytes
-            data = conn.recv(1024).decode()
-            if not data:
+            receivedMsgJson = conn.recv(1024).decode()
+            
+            if not receivedMsgJson:
                 # if data is not received break
                 break
-            print("from connected user: " + str(data))
-            if data == "launch":
-                print("launching")
-                os.chdir(ENVLocation)
+
+            receivedMsg = json.loads(receivedMsgJson)
+            print("Message from portal: " + str(receivedMsg))
+            logMsg(f"Message from portal: { receivedMsg }")
+            if receivedMsg[0] == "up":
+                print(f'Launching { receivedMsg[2] }...')
+                envLocation = f'{ mainEnvLocation }/{ receivedMsg[1]}/{ receivedMsg[2] }'
+                os.chdir(envLocation)
                 os.system('docker-compose up -d')
-                runningENVs.append(ENVLocation)
-                returnMessage = f'Containers at location "{ ENVLocation }" starting up...'
+                runningENVs.append(envLocation)
+                returnMessage = f'Containers in "{ receivedMsg[2] }" are starting up...'
+            elif receivedMsg[0] == "down":
+                # Need to test if is actually running
+                print(f'Stopping { receivedMsg[2] }...')
+                envLocation = f'{ mainEnvLocation }/{ receivedMsg[1]}/{ receivedMsg[2] }'
+                os.chdir(envLocation)
+                os.system('docker-compose down')
+                runningENVs.remove(envLocation)
+                returnMessage = f'Containers in "{ receivedMsg[2] }" have been stopped'
             else:
                 returnMessage = "Message acknowledged (but no function called)"
             conn.send(returnMessage.encode())  # send data to the client
