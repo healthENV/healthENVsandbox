@@ -1,5 +1,5 @@
 site_name: HealthENV
-
+site_url: https://healthenv.github.io/healthENVsandbox/
 nav:
   - Home: index.md
   - About: about.md
