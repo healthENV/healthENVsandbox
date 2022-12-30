@@ -25,3 +25,19 @@ needed to install brew and then
     brew install sphinx-doc
 add path
     PATH="$HOME/Library/Python/3.9/bin:$PATH"
+
+Run in parent folder o make rst files of python code:
+    > sphinx-apidoc -o docs app/
+
+remake doc files:
+    > make clean html
+    > make html  
+
+
+unit testing (example with different locations for tests and code):
+    > python -m unittest discover -s tests -t src
+
+
+libreTranslate
+use [] option if you want to download language models during docker build
+    > docker build [--build-arg with_models=true] -t libretranslate .

@@ -100,19 +100,19 @@ window.digitalData = {"page":{"pageInfo":{"pageName":"nhs:manual:design-system"}
           <svg class="nhsuk-icon nhsuk-icon__search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="40" width="100">
             <path d="M19.71 18.29l-4.11-4.1a7 7 0 1 0-1.41 1.41l4.1 4.11a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 10a5 5 0 1 1 5 5 5 5 0 0 1-5-5z"></path>
           </svg>
-          <span class="nhsuk-u-visually-hidden">Search</span>
+          <span class="nhsuk-u-visually-hidden">{{ trans['Search'] }}</span>
         </button>
         <div class="nhsuk-header__search-wrap" id="wrap-search">
           <form class="nhsuk-header__search-form" id="search" action="/search/" method="get" role="search">
             <label class="nhsuk-u-visually-hidden" for="search-field">Search the NHS website</label>
             <div class="autocomplete-container" id="autocomplete-container"></div>
-            <input class="nhsuk-search__input" id="search-field" name="search-field" type="search" placeholder="Search" autocomplete="off">
+            <input class="nhsuk-search__input" id="search-field" name="search-field" type="search" placeholder="{{ trans['Search'] }}" autocomplete="off">
 
             <button class="nhsuk-search__submit" type="submit">
               <svg class="nhsuk-icon nhsuk-icon__search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="27" height="27">
                 <path d="M19.71 18.29l-4.11-4.1a7 7 0 1 0-1.41 1.41l4.1 4.11a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 10a5 5 0 1 1 5 5 5 5 0 0 1-5-5z"></path>
               </svg>
-              <span class="nhsuk-u-visually-hidden">Search</span>
+              <span class="nhsuk-u-visually-hidden">{{ trans['Search']}}</span>
             </button>
             <button class="nhsuk-search__close" id="close-search">
               <svg class="nhsuk-icon nhsuk-icon__close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="27" height="27">
@@ -150,7 +150,7 @@ window.digitalData = {"page":{"pageInfo":{"pageName":"nhs:manual:design-system"}
         
         <li class="nhsuk-header__navigation-item app-header__navigation-item__item--current">
           <a class="nhsuk-header__navigation-link" href="/standards-and-technology">
-            Portal
+            {{ trans['Portal'] }}
             <svg class="nhsuk-icon nhsuk-icon__chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"  width="34" height="34">
               <path d="M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z"></path>
             </svg>
@@ -159,7 +159,7 @@ window.digitalData = {"page":{"pageInfo":{"pageName":"nhs:manual:design-system"}
         
         <li class="nhsuk-header__navigation-item">
           <a class="nhsuk-header__navigation-link" href="/design-system">
-            Network
+            {{ trans['Network'] }}
             <svg class="nhsuk-icon nhsuk-icon__chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"  width="34" height="34">
               <path d="M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z"></path>
             </svg>
@@ -168,7 +168,7 @@ window.digitalData = {"page":{"pageInfo":{"pageName":"nhs:manual:design-system"}
         
         <li class="nhsuk-header__navigation-item">
           <a class="nhsuk-header__navigation-link" href="/content">
-            Environments
+            {{ trans['Environments'] }}
             <svg class="nhsuk-icon nhsuk-icon__chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"  width="34" height="34">
               <path d="M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z"></path>
             </svg>
@@ -177,7 +177,7 @@ window.digitalData = {"page":{"pageInfo":{"pageName":"nhs:manual:design-system"}
         
         <li class="nhsuk-header__navigation-item">
           <a class="nhsuk-header__navigation-link" href="/accessibility">
-            Messages
+            {{ trans['Messages'] }}
             <svg class="nhsuk-icon nhsuk-icon__chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"  width="34" height="34">
               <path d="M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z"></path>
             </svg>
@@ -186,7 +186,7 @@ window.digitalData = {"page":{"pageInfo":{"pageName":"nhs:manual:design-system"}
         
         <li class="nhsuk-header__navigation-item">
           <a class="nhsuk-header__navigation-link" href="/community-and-contribution">
-            Settings
+            {{ trans['Settings'] }}
             <svg class="nhsuk-icon nhsuk-icon__chevron-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"  width="34" height="34">
               <path d="M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z"></path>
             </svg>

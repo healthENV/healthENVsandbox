@@ -1,0 +1,21 @@
+29/12/2022 20:01:59 - Start up
+29/12/2022 20:02:35 - Closing down routine
+29/12/2022 20:02:39 - Start up
+29/12/2022 20:04:39 - Start up
+29/12/2022 20:04:58 - Closing down routine
+29/12/2022 20:06:22 - Start up
+29/12/2022 20:06:25 - Closing down routine
+29/12/2022 20:07:16 - Start up
+29/12/2022 20:07:18 - Closing down routine
+29/12/2022 20:07:47 - Start up
+29/12/2022 20:07:49 - Closing down routine
+29/12/2022 20:10:18 - Start up
+29/12/2022 20:10:44 - Closing down routine
+29/12/2022 20:10:46 - Start up
+29/12/2022 20:10:53 - Closing down routine
+29/12/2022 20:17:35 - Start up
+29/12/2022 20:17:36 - Closing down routine
+29/12/2022 20:17:57 - Start up
+29/12/2022 20:18:00 - Closing down routine
+29/12/2022 20:57:06 - Closing down routine
+29/12/2022 20:57:20 - Closing down routine

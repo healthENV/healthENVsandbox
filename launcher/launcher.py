@@ -20,17 +20,29 @@ mainEnvLocation = "/dockerfiles/"
 
 
 def logMsg(message):
+    """Message logger
+        :param str message: message to log
+        :returns: None
+        :rtype: None
+    """
     now = datetime.now()
     dateTime = now.strftime("%d/%m/%Y %H:%M:%S")
     print(f"{ dateTime } - { message }")
     f = open(logFile, "a")
     f.write(f"{ dateTime } - { message }\n")
     f.close()
+    return
+
 
 logMsg("Launcher start up")
 
 
 def handler_stop_signals(signum, frame):
+    """Catch SIGTERM from 'docker-compose down', to gracefully close down all containers started by launcher
+        :param str signum: TBC
+        :param str frame: TBC
+        :returns: exit
+    """
     global runningENVs, exitFlag
     logMsg("Closing down routine...")
 
@@ -71,6 +83,7 @@ class ipcClass(threading.Thread):
 
 
 def ipcThread(server_socket):
+
     global exitFlag, runningENVs
 
     #print(f"exit flag is: { exitFlag[0] }")
@@ -115,5 +128,5 @@ def ipcThread(server_socket):
 
 if __name__ == '__main__':
 	# Create new threads and start
-	ipcComm = ipcClass()
-	ipcComm.start()
+    ipcComm = ipcClass()
+    ipcComm.start()

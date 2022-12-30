@@ -7,7 +7,9 @@ from starlette.templating import Jinja2Templates
 import uvicorn
 import json
 from ipc import client_program
+from translate import translatedWords
 
+trans = translatedWords('fr')
 
 templates = Jinja2Templates(directory='templates')
 
@@ -15,6 +17,7 @@ templates = Jinja2Templates(directory='templates')
 async def homepage(request):
     template = "index.html"
     context = {"request": request}
+    context['trans'] = trans
     return templates.TemplateResponse(template, context)
 
 
@@ -25,12 +28,22 @@ async def messages(request):
 
 
 async def envSelected(request):
+    global trans
+    """Handles request to spin up a new ENV
+
+        :param dic request: the request sent by GET
+
+        :returns: new HTML
+
+        :rtype: HTML
+    """
     template = "envSelected.html"
     context = {"request": request}
     requestDic = vars(request)
     context["query_string"] = str(requestDic["scope"]["query_string"], 'UTF-8')[-1]
     launcherMsg = client_program('up', 'user1', 'ENV1')
     context['launcherMsg'] = launcherMsg
+    context['trans'] = trans
     return templates.TemplateResponse(template, context)
 
 
@@ -87,3 +100,14 @@ app = Starlette(debug=True, routes=routes, exception_handlers=exception_handlers
 # Not currently used as cannot do reload with below method, only from command line
 if __name__ == "__main__":
     uvicorn.run(app, host='0.0.0.0', port=80)
+
+
+def testThing():
+    """ Test
+
+        :returns: 2
+
+        :rtype: int
+    """
+    print("test")
+    return 2

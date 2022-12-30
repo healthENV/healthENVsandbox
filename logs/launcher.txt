@@ -83,3 +83,13 @@
 29/12/2022 16:03:17 - Message from portal: ['down', 'user1', 'ENV1']
 29/12/2022 16:04:37 - Message from portal: ['up', 'user1', 'ENV1']
 29/12/2022 16:06:15 - Message from portal: ['down', 'user1', 'ENV1']
+29/12/2022 21:42:30 - Launcher start up
+29/12/2022 21:45:08 - Launcher start up
+29/12/2022 22:15:44 - Launcher start up
+29/12/2022 23:02:06 - Launcher start up
+29/12/2022 23:10:56 - Closing down routine...
+30/12/2022 08:41:09 - Launcher start up
+30/12/2022 12:24:03 - Launcher start up
+30/12/2022 12:24:25 - Closing down routine...
+30/12/2022 12:24:25 - Launcher start up
+30/12/2022 12:31:50 - Message from portal: ['up', 'user1', 'ENV1']
