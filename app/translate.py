@@ -4,28 +4,36 @@
 import json
 import sys
 from urllib import request, parse
+import pickle
+import os.path
+
 
 url = "http://0.0.0.0:4000/"
+dictLocation = './dictionaryMultilingual.pi'
 
-
-dictionaryMultilingual = {
-    'Build consistent, accessible user interfaces. Learn from the research and experience of other NHS digital teams.': {'fr': "Créez des interfaces utilisateur cohérentes et accessibles. Apprenez des recherches et de l'expérience d'autres équipes numériques du NHS."},
-    'Command line': {'fr': 'ligne de commande'},
-    'Environments': {'fr': 'Environnements'},
-    'Network': {'fr': 'Réseau'},
-    'Messages': {'fr': 'Messages'},
-    'Portal': {'fr': 'Portail'},
-    'Search': {'fr': 'Rechercher'},
-    'Settings': {'fr': 'Réglages'},
-    'Spin up an environment': {'fr': 'Faire tourner un environnement'},
-    'Use the tools below to start up a new environment': {'fr': 'Utilisez les outils ci-dessous pour démarrer un nouvel environnement'},
-    'Use the link below to start up a new command line': {'fr': 'Utilisez le lien ci-dessous pour démarrer une nouvelle ligne de commande'},
+if os.path.exists(dictLocation):
+    file = open(dictLocation, 'rb')
+    dictionaryMultilingual = pickle.load(file)
+    file.close()
+else:
+    dictionaryMultilingual = {
+        'Build consistent, accessible user interfaces. Learn from the research and experience of other NHS digital teams.': {},
+        'Command line': {},
+        'Environments': {},
+        'Network': {},
+        'Messages': {},
+        'Portal': {},
+        'Search': {},
+        'Settings': {},
+        'Spin up an environment': {},
+        'Use the tools below to start up a new environment': {},
+        'Use the link below to start up a new command line': {},
 }
 
-testWords = {'bike': '','chair': '', 'house': ''}
+#print(dictionaryMultilingual)
+#sys.exit()
 
-
-definedLanguages = ['en', 'fr', 'ge']
+definedLanguages = ['en','fr', 'fi', 'sv', 'it']
 
 
 def updateDictionary():
@@ -37,12 +45,18 @@ def updateDictionary():
     lt = LibreTranslateAPI(url)
 
     for key1, value1 in dictionaryMultilingual.items():
-        for key2, value2 in value1.items():
+        if not value1:
             for lang in definedLanguages:
-                translation = lt.translate(key1, lang, key2)
-                print(translation)
-                dictionaryMultilingual[key1][lang]= translation
-    #print(dictionaryMultilingual)
+                try:
+                    translation = lt.translate(key1, "en", lang)
+                except:
+                    print("Error translating")
+                else:
+                    dictionaryMultilingual[key1][lang]= translation
+    
+    file = open('dictionaryMultilingual.pi', 'wb')
+    pickle.dump(dictionaryMultilingual, file)
+    file.close()
     return
 
 
@@ -54,14 +68,14 @@ def translatedWords(language):
         :returns: None
         :rtype: None
     """
-
+    print(dictionaryMultilingual)
+    print('****')
     if language not in definedLanguages:
         raise Exception(f"Provided language '{ language }' is not defined")
         return
 
     dictionarySingleLanguage = {}
     for key1, value1 in dictionaryMultilingual.items():
-        dictionarySingleLanguage[key1] = key1
         for key2, value2 in value1.items():
             if key2 == language:
                 dictionarySingleLanguage[key1] = value2
@@ -162,4 +176,6 @@ class LibreTranslateAPI:
 
 
 if __name__ == '__main__':
-    updateDictionary()
+    #updateDictionary()
+    print(translatedWords('sv'))
+    

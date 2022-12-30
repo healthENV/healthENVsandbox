@@ -9,7 +9,7 @@ import json
 from ipc import client_program
 from translate import translatedWords
 
-trans = translatedWords('fr')
+trans = translatedWords('it')
 
 templates = Jinja2Templates(directory='templates')
 
@@ -28,15 +28,14 @@ async def messages(request):
 
 
 async def envSelected(request):
-    global trans
-    """Handles request to spin up a new ENV
-
+    """
+        Handles request to spin up a new ENV
         :param dic request: the request sent by GET
-
         :returns: new HTML
-
         :rtype: HTML
     """
+    global trans
+
     template = "envSelected.html"
     context = {"request": request}
     requestDic = vars(request)

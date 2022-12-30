@@ -93,3 +93,15 @@
 30/12/2022 12:24:25 - Closing down routine...
 30/12/2022 12:24:25 - Launcher start up
 30/12/2022 12:31:50 - Message from portal: ['up', 'user1', 'ENV1']
+30/12/2022 13:03:05 - Closing down routine...
+30/12/2022 13:03:05 - Closing containers at: /dockerfiles//user1/ENV1
+30/12/2022 14:08:44 - Launcher start up
+30/12/2022 14:23:22 - Message from portal: ['up', 'user1', 'ENV1']
+30/12/2022 14:24:05 - Message from portal: ['up', 'user1', 'ENV1']
+30/12/2022 14:24:19 - Message from portal: ['down', 'user1', 'ENV1']
+30/12/2022 14:24:36 - Message from portal: ['up', 'user1', 'ENV1']
+30/12/2022 14:24:57 - Message from portal: ['up', 'user1', 'ENV1']
+30/12/2022 14:25:07 - Message from portal: ['down', 'user1', 'ENV1']
+30/12/2022 14:25:40 - Closing down routine...
+30/12/2022 14:25:40 - Closing containers at: /dockerfiles//user1/ENV1
+30/12/2022 14:25:40 - Closing containers at: /dockerfiles//user1/ENV1
