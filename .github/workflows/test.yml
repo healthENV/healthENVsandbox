@@ -20,5 +20,5 @@ jobs:
       run: pwd
     - name: ls
       run: ls
-    - name: Build the Docker image
-      run: cd ./docs && docker compose build .
+    - name: Build the Docker image and run
+      run: docker compose --file ./docs/Docker-compose.yml up 
