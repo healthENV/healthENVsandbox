@@ -7,11 +7,10 @@ on:
 permissions:
   contents: write
 jobs:
-  deploy:
-    runs-on: ubuntu:20.04
+  container-test-job:
+    runs-on: ubuntu-latest
     container:
       build: /docs
-      container_name: mkdocs
       ports:
         - 80:80
         - 443:443
@@ -19,5 +18,6 @@ jobs:
         - ../app:/app
         - ../docs:/docs
         - ../launcher:/launcher
-      command: 
-        mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'
+      steps:
+        - name: Start up mk-docs gh-deploy
+          run: mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'
