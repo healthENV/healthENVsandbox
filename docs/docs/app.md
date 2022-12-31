@@ -1,4 +1,3 @@
 # Starlette app
 
 ::: app
-<br />

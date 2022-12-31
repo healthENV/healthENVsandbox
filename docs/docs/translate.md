@@ -1,3 +1,2 @@
 # Translate webpages
 
-::: translate

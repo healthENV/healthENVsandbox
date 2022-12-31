@@ -12,7 +12,7 @@ nav:
   - explanation.md
   - Portal modules:
     - app.md
-    - translate.md
+#    - translate.md
   - Launcher modules:
     - launcher.md
 
