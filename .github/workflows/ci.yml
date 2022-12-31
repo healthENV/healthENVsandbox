@@ -1,23 +1,26 @@
-name: ci 
+name: 'MkDocs webpage'
 on:
   push:
     branches:
       - master 
       - main
+
 permissions:
   contents: write
+
 jobs:
-  container-test-job:
+  vm:
     runs-on: ubuntu-latest
-    container:
-      build: /docs
-      ports:
-        - 80:80
-        - 443:443
-      volumes:
-        - ../app:/app
-        - ../docs:/docs
-        - ../launcher:/launcher
-      steps:
-        - name: Start up mk-docs gh-deploy
-          run: mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'
+    services:
+      mkdocs:
+        build: /docs
+        ports:
+          - 80:80
+          - 443:443
+        volumes:
+          - ../app:/app
+          - ../docs:/docs
+          - ../launcher:/launcher
+#      steps:
+#        - name: Start up mk-docs gh-deploy
+#          run: mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'
