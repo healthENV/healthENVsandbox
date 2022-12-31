@@ -8,12 +8,16 @@ permissions:
   contents: write
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: 3.x
-      - run: pip install mkdocs-material
-      - run: pip install mkdocstrings[python]
-      - run: mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'
+    runs-on: ubuntu:20.04
+    container:
+      build: /docs
+      container_name: mkdocs
+      ports:
+        - 80:80
+        - 443:443
+      volumes:
+        - ../app:/app
+        - ../docs:/docs
+        - ../launcher:/launcher
+      steps:
+        - run: mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'
