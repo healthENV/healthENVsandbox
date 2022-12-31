@@ -12,7 +12,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: ECHO
+    - name: pwd
       run: pwd
+    - name: cd
+      run: cd ./docs
+    - name: pwd
+      run: pwd
+    - name: ls
+      run: ls
     - name: Build the Docker image
-      run: cd ./docs && docker compose build
+      run: cd ./docs && docker compose build .
