@@ -22,4 +22,3 @@ jobs:
       run: ls
     - name: Build the Docker image and run
       run: docker compose --file ./docs/Docker-compose.yml up -d
-      mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'
