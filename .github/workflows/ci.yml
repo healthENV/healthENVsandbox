@@ -19,5 +19,5 @@ jobs:
         - ../app:/app
         - ../docs:/docs
         - ../launcher:/launcher
-      steps:
-        - run: mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'
+      command: 
+        mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'
