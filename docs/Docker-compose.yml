@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  mkdocs:
+    build: .
+    container_name: mkdocs
+    ports:
+      - 8000:8000
+    volumes:
+      - ../app:/app
+      - ../docs:/docs
+      - ../launcher:/launcher
+    command:
+      sh -c "while true; do moo; sleep 2; done"

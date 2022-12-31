@@ -41,3 +41,16 @@ unit testing (example with different locations for tests and code):
 libreTranslate
 use [] option if you want to download language models during docker build
     > docker build [--build-arg with_models=true] -t libretranslate .
+
+
+To run an auto update site on localhost of the mkdocs 
+    > docker run --rm -it -p 8000:8000 -v ${PWD}:/docs squidfunk/mkdocs-material
+
+To build the site (if you want to) of mkdocs
+    > docker run --rm -it -v ${PWD}:/docs squidfunk/mkdocs-material build
+
+Test code:
+    > python -m doctest [python file name]
+
+Need to specify 0.0.0.0 for mkdocs in container to then enable connection to outsie world
+    > mkdocs serve --dev-addr=0.0.0.0:8000

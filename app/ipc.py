@@ -1,20 +1,31 @@
-"""
-    Interprocess communication (IPC) - client end
+# app/ipc.py
+ 
+"""Interprocess communication (IPC) - client end
+
+Functions:
+- client_program()
+- sumOwn()
+
 """
 
 import socket
 import json
 
-def client_program(function, user, env):
+def client_program(function: str, user: str, env: str) -> str:
     """IPC (interprocess communication) with launcher container
+        
+        Examples:
+            >>> client_program('up', 'user1', 'ENV1')
+            Seems that launcher is not running
+            '0'
 
-        :param str function: docker-compose 'up' or 'down'
-        :param str user: user ID
-        :param str env: the ENV to use
+        Args:
+            function: docker-compose 'up' or 'down'
+            user: user ID
+            env: the ENV to use
 
-        :returns: Message received from launcher container
-
-        :rtype: str or int
+        Returns:
+            Message received from launcher container
     """
 
     host = "launcher" #socket.gethostname()
@@ -24,7 +35,7 @@ def client_program(function, user, env):
         client_socket.connect((host, port))  # connect to the server
     except:
         print("Seems that launcher is not running")
-        return 0
+        return '0'
     else:
         toSend = [function, user, env]
         toSendJson = json.dumps(toSend)
