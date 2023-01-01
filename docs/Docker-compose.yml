@@ -11,6 +11,5 @@ services:
       - ../launcher:/launcher
     working_dir: /docs
     command:
-      #sh -c "mkdocs gh-deploy --force --config-file 'docs/mkdocs.yml'"
       #sh -c "mkdocs serve --dev-addr=0.0.0.0:8000"
       sh -c "while true; do moo; sleep 2; done"
