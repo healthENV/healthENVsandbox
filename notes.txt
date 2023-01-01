@@ -49,6 +49,9 @@ To run an auto update site on localhost of the mkdocs
 To build the site (if you want to) of mkdocs
     > docker run --rm -it -v ${PWD}:/docs squidfunk/mkdocs-material build
 
+On Docker:
+    > mkdocs build
+
 Test code:
     > python -m doctest [python file name]
 
