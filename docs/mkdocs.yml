@@ -17,7 +17,7 @@ nav:
     - launcher.md
 
 theme:
-  name: mkdocs
+  name: readthedocs
 
 plugins:
 - mkdocstrings:
