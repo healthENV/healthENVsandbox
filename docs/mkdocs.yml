@@ -1,8 +1,8 @@
 site_name: HealthENV
 site_url: https://healthenv.github.io/healthENVsandbox/
 
-markdown_extensions:
-    - pymdownx.snippets:
+#markdown_extensions:
+#    - pymdownx.snippets:
 
 nav:
   - Home: index.md
@@ -17,10 +17,10 @@ nav:
     - launcher.md
 
 theme:
-  name: readthedocs
+  name: mkdocs
 
-plugins:
-- mkdocstrings:
-    handlers:
-      python:
-        paths: [/app, /launcher]
+#plugins:
+#- mkdocstrings:
+#    handlers:
+#      python:
+ #       paths: [/app, /launcher]
