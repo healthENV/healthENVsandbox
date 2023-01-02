@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 
-set timeout 5
+set timeout 3
 
 spawn mkdocs gh-deploy --force
 
