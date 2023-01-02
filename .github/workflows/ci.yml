@@ -1,18 +1,21 @@
-name: ci
+name: ci 
 on:
   push:
     branches:
       - master 
       - main
+permissions:
+  contents: write
 jobs:
-
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
-    env:
-      GH_user: ${{ secrets.GH_user }}
-      GH_token: ${{ secrets.GH_token }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image and run
-      run: docker compose --file ./docs/Docker-compose_GA.yml up
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      #- run: pip install mkdocs
+      - run: pip install mkdocs-material
+      - run: pip install mkdocstrings[python]
+      #- run: pip install -r '.github/workflows/requirements.txt'
+      - run: mkdocs gh-deploy --force --config-file './docs/mkdocs.yml'
