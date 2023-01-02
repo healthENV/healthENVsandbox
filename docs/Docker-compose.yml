@@ -16,3 +16,4 @@ services:
     command:
       #sh -c "mkdocs serve --dev-addr=0.0.0.0:8000"
       sh -c "while true; do moo; sleep 2; done"
+      #sh -c "./gh-deploy.sh"
