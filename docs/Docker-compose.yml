@@ -5,11 +5,14 @@ services:
     container_name: mkdocs
     ports:
       - 8000:8000
+    env_file:
+      - ../.env
     volumes:
-      - ../app:/app
-      - ../docs:/docs
-      - ../launcher:/launcher
-    working_dir: /docs
+      - ../:/project
+      #- ../app:/app
+      #- ../docs:/docs
+      #- ../launcher:/launcher
+    working_dir: /project/docs
     command:
       #sh -c "mkdocs serve --dev-addr=0.0.0.0:8000"
       sh -c "while true; do moo; sleep 2; done"

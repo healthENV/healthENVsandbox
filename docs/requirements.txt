@@ -33,6 +33,7 @@ mkdocstrings==0.19.1
 mkdocstrings-python==0.8.2
 oauthlib==3.1.0
 packaging==22.0
+pexpect
 protobuf==3.6.1
 pycairo==1.16.2
 pycups==1.9.73

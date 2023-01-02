@@ -5,12 +5,15 @@ services:
     container_name: mkdocs
     ports:
       - 8000:8000
-      - 80:80
-      - 433:433
+    environment:
+      - GH_user=${GH_user}
+      - GH_token=${GH_token}
     volumes:
-      - ../app:/app
-      - ../docs:/docs
-      - ../launcher:/launcher
-    working_dir: /docs
+      - ../:/project
+      #- ../app:/app
+      #- ../docs:/docs
+      #- ../launcher:/launcher
+    working_dir: /project/docs
     command:
-      sh -c "mkdocs gh-deploy --force"
+      #sh -c "mkdocs serve --dev-addr=0.0.0.0:8000"
+      sh -c "./gh-deploy.sh"
