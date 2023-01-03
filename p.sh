@@ -9,5 +9,5 @@ echo "Running commit - \"message $1\"";
 
 git add .
 git commit -a -m "$1"
-
+git push
 echo "Documents done";
