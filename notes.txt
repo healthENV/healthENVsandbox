@@ -16,7 +16,6 @@ to get ping installed on hub container:
 apt-get update -y
 apt-get install -y iputils-ping
 
-
 For sphinx
 https://www.sphinx-doc.org/en/master/usage/installation.html
 https://www.sphinx-doc.org/en/master/usage/quickstart.html

@@ -7,6 +7,7 @@ echo "Running commit - \"message $1\"";
 #git commit --all -m "$1"
 #git push origin main
 
-git add . ;git commit -a -m "$1"
+git add .
+git commit -a -m "$1"
 
 echo "Documents done";
