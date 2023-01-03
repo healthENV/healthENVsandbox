@@ -1,4 +1,3 @@
-This part of the project documentation focuses on
-an **information-oriented** approach. Use it as a
-reference for the technical implementation of the
-`calculator` project code.
+Many thanks to the team who wrote the LibraTranslate code at [https://github.com/argosopentech/LibreTranslate-py](https://github.com/argosopentech/LibreTranslate-py). A fraction of their code was used for getting translations
+
+::: translate:LibreTranslateAPI
