@@ -9,9 +9,9 @@ services:
       - ../.env
     volumes:
       - ../:/project
-      #- ../app:/app
-      #- ../docs:/docs
-      #- ../launcher:/launcher
+      #- ../app:/project/app
+      #- ../docs:/project/docs
+      #- ../launcher:/project/launcher
     working_dir: /project/docs
     command:
       #sh -c "mkdocs serve --dev-addr=0.0.0.0:8000"
