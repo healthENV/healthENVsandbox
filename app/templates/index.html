@@ -2,31 +2,32 @@
 
 {% block content %}
 
-<h1 class="app-page-heading">
-  {{ trans['Spin up an environment'] }}
-</h1>
+<div id="mainBody">
+  <h1 class="app-page-heading">
+    {{ trans['Spin up an environment'] }}
+  </h1>
 
 
-<p class="nhsuk-lede-text app-lede-text">
-  {{ trans['Build consistent, accessible user interfaces. Learn from the research and experience of other NHS digital teams.'] }}
-</p>
+  <p class="nhsuk-lede-text app-lede-text">
+    {{ trans['Build consistent, accessible user interfaces. Learn from the research and experience of other NHS digital teams.'] }}
+  </p>
 
-<div class="nhsuk-form-group">
+  <div class="nhsuk-form-group">
+    <label class="nhsuk-label" for="select-1">
+      {{ trans['Use the tools below to start up a new environment'] }}
+    </label>
+    <select class="nhsuk-select" id="select-1" name="select-1" hx-get="/envSelected" hx-swap="outerHTML" hx-include="[id='select-1']">
+      <option value="0">...</option>
+      <option value="1">openEMR</option>
+      <option value="2" disabled>Health stack Bahmi</option>
+      <option value="3" disabled>Health stack Better.care</option>
+    </select>
+  </div>
+
   <label class="nhsuk-label" for="select-1">
-    {{ trans['Use the tools below to start up a new environment'] }}
+    {{ trans['Use the link below to start up a new command line'] }}:
   </label>
-  <select class="nhsuk-select" id="select-1" name="select-1" hx-get="/envSelected" hx-swap="outerHTML" hx-include="[id='select-1']">
-    <option value="1">...</option>
-    <option value="1">openEMR</option>
-    <option value="2" disabled>Health stack Bahmi</option>
-    <option value="3" disabled>Health stack Better.care</option>
-  </select>
+
+  <p><a href="url">{{ trans['Command line'] }}</a></p>
 </div>
-
-<label class="nhsuk-label" for="select-1">
-  {{ trans['Use the link below to start up a new command line'] }}:
-</label>
-
-<p><a href="url">{{ trans['Command line'] }}</a></p>
-
 {% endblock %}

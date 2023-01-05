@@ -16,7 +16,7 @@ logFile = "/logs/launcher.txt"
 
 
 runningENVs = []
-mainEnvLocation = "/dockerfiles/"
+mainEnvLocation = "/dockerfiles_users"
 
 
 def logMsg(message):
@@ -33,8 +33,6 @@ def logMsg(message):
     f.close()
     return
 
-
-logMsg("Launcher start up")
 
 
 def handler_stop_signals(signum, frame):
@@ -62,20 +60,16 @@ signal.signal(signal.SIGTERM, handler_stop_signals)
 
 
 
-# Threading code for Django to python communication
 class ipcClass(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
     def run(self):
-        # get the hostname
         host = socket.gethostname()
-        port = 5000  # initiate port no above 1024
+        port = 5000
+        server_socket = socket.socket()
+        server_socket.bind((host, port))
 
-        server_socket = socket.socket()  # get instance
-        # look closely. The bind() function takes tuple as argument
-        server_socket.bind((host, port))  # bind host address and port together
-
-        # configure how many client the server can listen simultaneously
+        # Configure how many client the server can listen simultaneously
         server_socket.listen(2)
         print("now listening out for clients")
         ipcThread(server_socket)
@@ -98,6 +92,8 @@ def ipcThread(server_socket):
             if not receivedMsgJson:
                 # if data is not received break
                 break
+            
+            # TODO: #3 need to check dockerfile exists first
 
             receivedMsg = json.loads(receivedMsgJson)
             print("Message from portal: " + str(receivedMsg))
@@ -127,6 +123,7 @@ def ipcThread(server_socket):
 
 
 if __name__ == '__main__':
+    logMsg("Launcher start up")
 	# Create new threads and start
     ipcComm = ipcClass()
     ipcComm.start()

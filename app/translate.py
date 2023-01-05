@@ -6,47 +6,86 @@ import sys
 from urllib import request, parse
 import pickle
 import os.path
+import re
+import os
+import subprocess
+import pexpect
+
+mainDirectory: str = os.getcwd()
+#print(mainDirectory)
+url: str = 'http://0.0.0.0:5006/'
+dictLocation: str = './dictionaryMultilingual.pi'
+rootdir: str = './templates'
+dictionaryMultilingual = {}
+name: str = 'Hello'
+name = 100
 
 
-url = "http://0.0.0.0:4000/"
-dictLocation = './dictionaryMultilingual.pi'
 
 if os.path.exists(dictLocation):
     file = open(dictLocation, 'rb')
     dictionaryMultilingual = pickle.load(file)
     file.close()
-else:
-    dictionaryMultilingual = {
-        'Build consistent, accessible user interfaces. Learn from the research and experience of other NHS digital teams.': {},
-        'Command line': {},
-        'Environments': {},
-        'Network': {},
-        'Messages': {},
-        'Portal': {},
-        'Search': {},
-        'Settings': {},
-        'Spin up an environment': {},
-        'Use the tools below to start up a new environment': {},
-        'Use the link below to start up a new command line': {},
-}
+
 
 #print(dictionaryMultilingual)
 #sys.exit()
 
-definedLanguages = ['en','fr', 'fi', 'sv', 'it']
+DEFINEDLANGUAGES = ['en','fr', 'fi', 'sv', 'it']
+
+def findSentensesToTranslate():
+    """Searches templates folder to find trans['someSentenseToTranslate']
+    
+    """
+
+    global dictionaryMultilingual
+
+    for subdir, dirs, files in os.walk(rootdir):
+        for file in files:
+            filepath = subdir + os.sep + file
+            if filepath.endswith(".html"):
+                f = open(filepath, "r")
+                fileContents = f.read()
+                f.close()
+                result = re.findall('trans\[\'(.*)\'\]', fileContents)
+                #print(result)
+                for sentence in result:
+                    if sentence not in dictionaryMultilingual:
+                        dictionaryMultilingual[sentence] = {}
+                        #print(sentence)
+    
+    #print(dictionaryMultilingual)
+    updateDictionary()
+
+    return
+
 
 
 def updateDictionary():
+    """Updates from LibreTranslate container (still in building phase)
+
     """
-        Updates from LibreTranslate container (still in building phase)
-    """
-    global dictionaryMultilingual, definedLanguages
+
+    global dictionaryMultilingual, DEFINEDLANGUAGES
 
     lt = LibreTranslateAPI(url)
 
+    # Check if LibreTranslate installed
+
+
+    # Check if docker container running (if not start it)
+    
+    #os.chdir(mainDirectory)
+    #os.chdir("..")
+
+    # Check if running well 
+
+    # Send translation queries
+
+    
     for key1, value1 in dictionaryMultilingual.items():
         if not value1:
-            for lang in definedLanguages:
+            for lang in DEFINEDLANGUAGES:
                 try:
                     translation = lt.translate(key1, "en", lang)
                 except:
@@ -68,9 +107,9 @@ def translatedWords(language):
         :returns: None
         :rtype: None
     """
-    print(dictionaryMultilingual)
-    print('****')
-    if language not in definedLanguages:
+    #print(dictionaryMultilingual)
+    #print('****')
+    if language not in DEFINEDLANGUAGES:
         raise Exception(f"Provided language '{ language }' is not defined")
         return
 
@@ -176,6 +215,7 @@ class LibreTranslateAPI:
 
 
 if __name__ == '__main__':
-    #updateDictionary()
-    print(translatedWords('sv'))
+    updateDictionary()
+    #print(translatedWords('fr'))
+    #findSentensesToTranslate()
     

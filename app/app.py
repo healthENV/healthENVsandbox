@@ -9,7 +9,7 @@ import json
 from ipc import client_program
 from translate import translatedWords
 
-trans = translatedWords('it')
+trans = translatedWords('en')
 
 templates = Jinja2Templates(directory='templates')
 
@@ -54,6 +54,30 @@ async def stopEnv(request):
     return templates.TemplateResponse(template, context)
 
 
+async def settings(request):
+    template = "settings.html"
+    context = {"request": request}
+    context['trans'] = trans
+    return templates.TemplateResponse(template, context)
+
+
+async def changeLanguage(request):
+    global translatedWords
+
+    chosenLanguage: str = ''
+
+    template = "changeLanguage.html"
+    context = {"request": request}
+    try:
+        chosenLanguage = request.query_params['select-2']
+        trans = translatedWords(chosenLanguage)
+    except:
+        print('Error with language selected!')
+
+    context['trans'] = trans
+    return templates.TemplateResponse(template, context)
+
+
 async def error(request):
     """
     An example error. Switch the `debug` setting to see either tracebacks or 500 pages.
@@ -84,6 +108,9 @@ routes = [
     Route('/messages', messages),
     Route('/envSelected', envSelected),
     Route('/stopEnv', stopEnv),
+    Route('/settings', settings),
+    Route('/changeLanguage', changeLanguage),
+
     Route('/error', error),
     Mount('/static', app=StaticFiles(directory='static'), name="static")
 ]

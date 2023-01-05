@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  libretranslate:
+    image: libretranslate/libretranslate
+    container_name: libretranslate
+    volumes:
+      # To store the language models, need both the share and cache
+      # folders (volume did not work). Used .gitignore to not copy
+      # to git
+      - ./share:/home/libretranslate/.local/share
+      - ./cache:/home/libretranslate/.local/cache
+    tty: true
+    ports:
+      - "5006:5000"
+
+#docker run -ti --rm -p 5006:5000 libretranslate/libretranslate

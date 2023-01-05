@@ -10,9 +10,10 @@ services:
       - "1080:80"
     volumes:
       - ./app:/app
-      - ./dockerfiles:/dockerfiles
+      - ./dockerfiles_users:/dockerfiles_users
       - ./ipc:/ipc
       - ./logs:/logs
+    working_dir: /app
     networks:
       - app-network
     command: >
@@ -23,12 +24,14 @@ services:
     build: ./dockerfiles_main/launcher
     container_name: launcher
     volumes:
-    # Siblings needed for
+    # Can run sibling containers with the below socket
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./dockerfiles:/dockerfiles
+      - ./dockerfiles_users:/dockerfiles_users
+      - ./dockerfiles_main/libretranslate:/libretranslate
       - ./ipc:/ipc
       - ./launcher:/launcher
       - ./logs:/logs
+    working_dir: /launcher
     networks:
       - app-network
 #      - envNetwork
@@ -37,7 +40,7 @@ services:
     depends_on:
       - portal
     # use of entrypoint rather than command to make below function PID1, and can then handle SIGTERM appropriately (Linux treats PID1 a little different to other processes (harder to kill))
-    entrypoint: sh -c "python ./launcher/launcher.py"
+    entrypoint: sh -c "python launcher.py"
 
 
 #  webserver:

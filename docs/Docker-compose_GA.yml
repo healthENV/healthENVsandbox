@@ -10,10 +10,6 @@ services:
       - GH_token=${GH_token}
     volumes:
       - ../:/project
-      #- ../app:/app
-      #- ../docs:/docs
-      #- ../launcher:/launcher
     working_dir: /project/docs
     command:
-      #sh -c "mkdocs serve --dev-addr=0.0.0.0:8000"
       sh -c "./gh-deploy.sh"

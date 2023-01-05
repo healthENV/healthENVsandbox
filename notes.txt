@@ -36,10 +36,13 @@ remake doc files:
 unit testing (example with different locations for tests and code):
     > python -m unittest discover -s tests -t src
 
+LibreTranslate fresh approach (https://github.com/LibreTranslate/LibreTranslate):
+    ####> git clone https://github.com/LibreTranslate/LibreTranslate
+    -rm -> remove container when it is not used anymore
+    > docker run -ti --rm -p 5006:5000 libretranslate/libretranslate
 
-libreTranslate
-use [] option if you want to download language models during docker build
-    > docker build [--build-arg with_models=true] -t libretranslate .
+OLD version (but 403 errors, which are likely due to port conflicts):
+    > 
 
 
 To run an auto update site on localhost of the mkdocs 
@@ -56,3 +59,6 @@ Test code:
 
 Need to specify 0.0.0.0 for mkdocs in container to then enable connection to outsie world
     > mkdocs serve --dev-addr=0.0.0.0:8000
+
+
+Need to run mypy to check for type errors

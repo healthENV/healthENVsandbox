@@ -1,3 +1,7 @@
+# LibreTranslate
+/dockerfiles_main/libretranslate/cache/
+/dockerfiles_main/libretranslate/share/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
