@@ -1,8 +1,12 @@
-<div class="nhsuk-form-group" id="select-2" name="select-2" hx-get="/changeLanguage" hx-swap="outerHTML" hx-include="[id='select-2']">
-    <select class="nhsuk-select" id="select-1" name="select-1">
-        <option value="1">English</option>
-        <option value="2" selected>French</option>
-        <option value="3">Italian</option>
+<div class="nhsuk-form-group">
+    <label class="nhsuk-label" for="select-1">
+        {{ trans['Change language'] }}
+      </label>
+      <select class="nhsuk-select" id="select-2" name="select-2" hx-get="/changeLanguage" hx-swap="outerHTML" hx-include="[id='select-2']">
+        <option value="en" {{ selected['en'] }}>English</option>
+        <option value="fi" {{ selected['fi'] }}>Finnish</option>
+        <option value="fr" {{ selected['fr'] }}>French</option>
+        <option value="it" {{ selected['it'] }}>Italian</option>
+        <option value="sv" {{ selected['sv'] }}>Swedish</option>
     </select>
 </div>
-

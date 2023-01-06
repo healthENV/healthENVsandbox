@@ -8,10 +8,30 @@ import uvicorn
 import json
 from ipc import client_program
 from translate import translatedWords
+import signal
+from starlette.responses import PlainTextResponse, RedirectResponse
 
-trans = translatedWords('en')
+language: str = 'en'
+trans = translatedWords(language)
 
 templates = Jinja2Templates(directory='templates')
+
+
+
+def handler_stop_signals(signum, frame):
+    """Catch SIGTERM from 'docker-compose down', to gracefully close down all containers started by launcher
+        :param str signum: TBC
+        :param str frame: TBC
+        :returns: exit
+    """
+    global runningENVs, exitFlag
+    logMsg("Closing down App")
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, handler_stop_signals)
+signal.signal(signal.SIGTERM, handler_stop_signals)
+
 
 
 async def homepage(request):
@@ -34,7 +54,6 @@ async def envSelected(request):
         :returns: new HTML
         :rtype: HTML
     """
-    global trans
 
     template = "envSelected.html"
     context = {"request": request}
@@ -58,24 +77,39 @@ async def settings(request):
     template = "settings.html"
     context = {"request": request}
     context['trans'] = trans
+    selectedLang = {'en': '', 'fi' : '', 'fr' : '', 'it' : '', 'sv' : ''}
+    selectedLang[language] = 'selected'
+    context['selected'] = selectedLang
     return templates.TemplateResponse(template, context)
 
 
 async def changeLanguage(request):
-    global translatedWords
+    global translatedWords, language, trans
 
-    chosenLanguage: str = ''
-
-    template = "changeLanguage.html"
+    template = "reload.html"
     context = {"request": request}
+
+    selectedLang = {'en': '', 'fi' : '', 'fr' : '', 'it' : '', 'sv' : ''}
+    selectedLang[language] = 'selected'
+    context['selected'] = selectedLang
+
     try:
-        chosenLanguage = request.query_params['select-2']
-        trans = translatedWords(chosenLanguage)
+        language = request.query_params['select-2']
+        trans = translatedWords(language)
     except:
         print('Error with language selected!')
 
+    #context['trans'] = trans
+    return templates.TemplateResponse(template, context)
+
+
+async def network(request):
+    template = "network.html"
+    context = {"request": request}
     context['trans'] = trans
     return templates.TemplateResponse(template, context)
+
+
 
 
 async def error(request):
@@ -103,6 +137,7 @@ async def server_error(request: Request, exc: HTTPException):
     return templates.TemplateResponse(template, context, status_code=500)
 
 
+
 routes = [
     Route('/', homepage),
     Route('/messages', messages),
@@ -110,6 +145,8 @@ routes = [
     Route('/stopEnv', stopEnv),
     Route('/settings', settings),
     Route('/changeLanguage', changeLanguage),
+    Route('/network', network),
+
 
     Route('/error', error),
     Mount('/static', app=StaticFiles(directory='static'), name="static")

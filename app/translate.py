@@ -10,15 +10,18 @@ import re
 import os
 import subprocess
 import pexpect
+from ipc import client_program
+
+
+DEFINEDLANGUAGES = ['en','fr', 'fi', 'sv', 'it']
 
 mainDirectory: str = os.getcwd()
 #print(mainDirectory)
-url: str = 'http://0.0.0.0:5006/'
+url: str = 'http://host.docker.internal:5006'
 dictLocation: str = './dictionaryMultilingual.pi'
 rootdir: str = './templates'
 dictionaryMultilingual = {}
-name: str = 'Hello'
-name = 100
+
 
 
 
@@ -31,7 +34,7 @@ if os.path.exists(dictLocation):
 #print(dictionaryMultilingual)
 #sys.exit()
 
-DEFINEDLANGUAGES = ['en','fr', 'fi', 'sv', 'it']
+
 
 def findSentensesToTranslate():
     """Searches templates folder to find trans['someSentenseToTranslate']
@@ -82,8 +85,8 @@ def updateDictionary():
 
     # Send translation queries
 
-    
     for key1, value1 in dictionaryMultilingual.items():
+
         if not value1:
             for lang in DEFINEDLANGUAGES:
                 try:
@@ -213,9 +216,15 @@ class LibreTranslateAPI:
         response_str = response.read().decode()
         return json.loads(response_str)
 
+def startLT():
+    launcherMsg = client_program('libreTranslate', 'up', 'NA')
+    return
 
 if __name__ == '__main__':
-    updateDictionary()
+    #updateDictionary()
     #print(translatedWords('fr'))
-    #findSentensesToTranslate()
+    #print('1')
+    findSentensesToTranslate()
+    #startLT()
+
     

@@ -8,8 +8,10 @@ services:
       # To store the language models, need both the share and cache
       # folders (volume did not work). Used .gitignore to not copy
       # to git
-      - ./share:/home/libretranslate/.local/share
+      # TODO: These binded volumes do not work in Sibling Docker! Need to investigate
       - ./cache:/home/libretranslate/.local/cache
+      - ./share:/home/libretranslate/.local/share
+      
     tty: true
     ports:
       - "5006:5000"

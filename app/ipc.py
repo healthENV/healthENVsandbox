@@ -11,7 +11,7 @@ Functions:
 import socket
 import json
 
-def client_program(function: str, user: str, env: str) -> str:
+def client_program(function: str = 'NA', user: str ='NA', env: str = 'NA') -> str:
     """IPC (interprocess communication) with launcher container
         
         Examples:

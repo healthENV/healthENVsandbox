@@ -17,7 +17,7 @@ logFile = "/logs/launcher.txt"
 
 runningENVs = []
 mainEnvLocation = "/dockerfiles_users"
-
+ltLocation = "/libretranslate"
 
 def logMsg(message):
     """Message logger
@@ -96,7 +96,6 @@ def ipcThread(server_socket):
             # TODO: #3 need to check dockerfile exists first
 
             receivedMsg = json.loads(receivedMsgJson)
-            print("Message from portal: " + str(receivedMsg))
             logMsg(f"Message from portal: { receivedMsg }")
             if receivedMsg[0] == "up":
                 print(f'Launching { receivedMsg[2] }...')
@@ -106,13 +105,20 @@ def ipcThread(server_socket):
                 runningENVs.append(envLocation)
                 returnMessage = f'Containers in "{ receivedMsg[2] }" are starting up...'
             elif receivedMsg[0] == "down":
-                # Need to test if is actually running
+                # TODO: #5 Need to test if is actually running
                 print(f'Stopping { receivedMsg[2] }...')
                 envLocation = f'{ mainEnvLocation }/{ receivedMsg[1]}/{ receivedMsg[2] }'
                 os.chdir(envLocation)
                 os.system('docker-compose down')
                 runningENVs.remove(envLocation)
                 returnMessage = f'Containers in "{ receivedMsg[2] }" have been stopped'
+            elif receivedMsg[0] == "libreTranslate":
+                print('Launching LibreTranslate')
+                os.chdir(ltLocation)
+                os.system('docker-compose up -d')
+                runningENVs.append(ltLocation)
+                returnMessage = 'Starting up libreTranslate'
+                # TODO Need spin down function as well
             else:
                 returnMessage = "Message acknowledged (but no function called)"
             conn.send(returnMessage.encode())  # send data to the client

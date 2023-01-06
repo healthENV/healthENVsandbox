@@ -18,7 +18,7 @@ services:
       - app-network
     command: >
       sh -c "uvicorn app:app --reload --host 0.0.0.0 --port 80"
-
+    # TODO: Need to find a graceful way to close down univorn. Perhaps with Gunvicon running
 
   launcher:
     build: ./dockerfiles_main/launcher
