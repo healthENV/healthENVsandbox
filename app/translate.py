@@ -50,7 +50,7 @@ def findSentensesToTranslate():
                 f = open(filepath, "r")
                 fileContents = f.read()
                 f.close()
-                result = re.findall('trans\[\'(.*)\'\]', fileContents)
+ #               result = re.findall('trans\[\'(.*)\'\]', fileContents)
                 #print(result)
                 for sentence in result:
                     if sentence not in dictionaryMultilingual:
