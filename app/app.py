@@ -17,6 +17,67 @@ trans = translatedWords(language)
 templates = Jinja2Templates(directory='templates')
 
 
+networks = {
+    'hospitals': {
+        1 : {
+            'name': 'Meadow Brook Hospital', 'epr':'Nexus', 'pas': 'Wards', 'pacs':'Spark', 'tie':'Echo', 'profilePic':'MeadowBrookHospital.jpg'
+        },
+        2 : {
+             'name':'Sutton Bridge Hospital', 'epr':'Nexus', 'pas': 'Cygnus', 'pacs':'Quantum', 'tie':'Flux', 'profilePic':'SuttonBridgeHospital.jpg'
+        },
+        3 : {
+            'name':'Rose Hill Hospital', 'epr':'AHHI', 'pas': 'Cygnus', 'pacs':'Spark', 'tie':'Velocity', 'profilePic':'RoseHillHospital.jpg'
+        },
+        4 : {
+            'name': 'Millfield Hospital', 'epr':'Nexus', 'pas': 'Wards', 'pacs':'Quantum', 'tie':'Echo', 'profilePic':'MillfieldHospital.jpg'
+        }
+    },
+    'gps': {
+        'Farm View Surgery' : {
+            'epr':'YRHealth'
+        },
+        'Hill Springs Surgery' : {
+            'epr':'ESSE'
+        },
+        'Cats Eye Surgery' : {
+            'epr':'Atom'
+        },
+        'Jump Gate Surgery' : {
+            'epr':'Atom'
+        }
+    },
+    'socialCare': {
+        'Ashtonshire Care' : {
+            'hub': 'County Connex'
+        },
+        'Westbridgeshire Area' : {
+            'hub': 'County Connex'
+        },
+        'Briarwoodshire Together' : {
+            'hub': 'JUTS'
+        },
+        'Mapleshire Towns' : {
+            'hub': 'JUTS'
+        }
+    },
+    'industry': {
+        'Eclipse Enterprises' : {
+            'products': 'EPR, PACS, PAS'
+        },
+        'Skyline Solutions' : {
+            'products': 'PAS'
+        },
+        'Summit Technologies' : {
+            'products': 'Personal health apps'
+        },
+        'Horizon Holdings' : {
+            'products': 'TIE'
+        }
+    }
+}
+
+
+#print(networks)
 
 def handler_stop_signals(signum, frame):
     """MKDOCS STD: Catch SIGTERM from 'docker-compose down', to gracefully close down all containers started by launcher
@@ -159,10 +220,23 @@ async def network(request):
     template = "network.html"
     context = {"request": request}
     context['trans'] = trans
-    return templates.TemplateResponse(template, context)
+    context['entity'] = networks['hospitals']
+    return templates.TemplateResponse (template, context)
 
 
+async def commandLine(request):
+    """Test page for the command line link
 
+        Args:
+            request: request results from client
+        Returns:
+            Command line HTMX result
+    """
+
+    template = "commandLine.html"
+    context = {"request": request}
+    context['trans'] = trans
+    return templates.TemplateResponse (template, context)
 
 async def error(request):
     """An example error. Switch the `debug` setting to see either tracebacks or 500 pages.
@@ -188,6 +262,7 @@ async def not_found(request: Request, exc: HTTPException):
 
     template = "404.html"
     context = {"request": request}
+    context['trans'] = trans
     return templates.TemplateResponse(template, context, status_code=404)
 
 
@@ -202,6 +277,7 @@ async def server_error(request: Request, exc: HTTPException):
 
     template = "500.html"
     context = {"request": request}
+    context['trans'] = trans
     return templates.TemplateResponse(template, context, status_code=500)
 
 
@@ -214,6 +290,7 @@ routes = [
     Route('/settings', settings),
     Route('/changeLanguage', changeLanguage),
     Route('/network', network),
+    Route('/commandLine', commandLine),
 
 
     Route('/error', error),

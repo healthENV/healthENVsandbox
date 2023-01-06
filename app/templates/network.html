@@ -1,13 +1,17 @@
 <div id="mainBody">
     <h1 class="app-page-heading">
-      {{ trans['Welcome to the network'] }}
+      {{ entity[1]['name']}}
     </h1>
 
-
-    Hospital name: ---
-    </br>
-    </br>
-    Hospital place
-
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-row">
+          <div class="nhsuk-grid-column-three-quarters">
+            <img src="static/media/{{ entity[1]['profilePic'] }}" alt="Profile pic" width="500" height="400">
+          </div>
+          <div class="nhsuk-grid-column-one-quarter">
+            <p>Information</p>
+          </div>
+        </div>
+    </div>
 
 </div>

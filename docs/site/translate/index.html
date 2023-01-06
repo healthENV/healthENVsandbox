@@ -785,7 +785,7 @@
                 <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
                 <span class="n">fileContents</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
- <span class="c1">#               result = re.findall(&#39;trans\[\&#39;(.*)\&#39;\]&#39;, fileContents)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;trans\[</span><span class="se">\&#39;</span><span class="s1">(.*)</span><span class="se">\&#39;</span><span class="s1">\]&#39;</span><span class="p">,</span> <span class="n">fileContents</span><span class="p">)</span>
                 <span class="c1">#print(result)</span>
                 <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">sentence</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dictionaryMultilingual</span><span class="p">:</span>

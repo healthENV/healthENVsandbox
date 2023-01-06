@@ -28,6 +28,8 @@
     {{ trans['Use the link below to start up a new command line'] }}:
   </label>
 
-  <p><a href="url">{{ trans['Command line'] }}</a></p>
+  <p><a href="/" hx-target="#mainBody" hx-get="/commandLine"">
+    {{ trans['Command line'] }}
+  </a></p>
 </div>
 {% endblock %}
