@@ -21,6 +21,9 @@ theme:
 
 plugins:
 - mkdocstrings:
+    watch:
+      - ../app
+      - ../launcher
     handlers:
       python:
         paths: [../app, ../launcher]

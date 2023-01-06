@@ -72,6 +72,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#launcher.handler_stop_signals">handler_stop_signals()</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#launcher.ipcThread">ipcThread()</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#launcher.logMsg">logMsg()</a>
     </li>
     </ul>
@@ -136,10 +138,56 @@
 
   <div class="doc doc-contents ">
   
-      <p>Catch SIGTERM from 'docker-compose down', to gracefully close down all containers started by launcher
-:param str signum: TBC
-:param str frame: TBC
-:returns: exit</p>
+      <p>Catch SIGTERM from 'docker-compose down', to gracefully close down all containers started by launcher</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>signum</code></td>
+          <td>
+          </td>
+          <td><p>TBC</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>frame</code></td>
+          <td>
+          </td>
+          <td><p>TBC</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+          </td>
+          <td><p>Exits</p></td>
+        </tr>
+    </tbody>
+  </table>
 
       <details class="quote">
         <summary>Source code in <code>launcher/launcher.py</code></summary>
@@ -160,11 +208,17 @@
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">handler_stop_signals</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">handler_stop_signals</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Catch SIGTERM from &#39;docker-compose down&#39;, to gracefully close down all containers started by launcher</span>
-<span class="sd">        :param str signum: TBC</span>
-<span class="sd">        :param str frame: TBC</span>
-<span class="sd">        :returns: exit</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            signum: TBC</span>
+<span class="sd">            frame: TBC</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Exits</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">runningENVs</span><span class="p">,</span> <span class="n">exitFlag</span>
     <span class="n">logMsg</span><span class="p">(</span><span class="s2">&quot;Closing down routine...&quot;</span><span class="p">)</span>
@@ -178,6 +232,162 @@
     <span class="n">exitFlag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="c1">#print(f&quot;exit flag is: { exitFlag[0] }&quot;)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="launcher.ipcThread" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">ipcThread</span><span class="p">(</span><span class="n">server_socket</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Connects to server in another container</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>server_socket</code></td>
+          <td>
+          </td>
+          <td><p>socket to connect to server</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>launcher/launcher.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">ipcThread</span><span class="p">(</span><span class="n">server_socket</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Connects to server in another container</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            server_socket: socket to connect to server</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">exitFlag</span><span class="p">,</span> <span class="n">runningENVs</span>
+
+    <span class="c1">#print(f&quot;exit flag is: { exitFlag[0] }&quot;)</span>
+    <span class="k">while</span> <span class="n">exitFlag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">conn</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="n">server_socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>  <span class="c1"># accept new connection</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connection from: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">address</span><span class="p">))</span>
+
+        <span class="k">while</span> <span class="n">exitFlag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># receive data stream. it won&#39;t accept data packet greater than 1024 bytes</span>
+            <span class="n">receivedMsgJson</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">receivedMsgJson</span><span class="p">:</span>
+                <span class="c1"># if data is not received break</span>
+                <span class="k">break</span>
+
+            <span class="c1"># TODO: #3 need to check dockerfile exists first</span>
+
+            <span class="n">receivedMsg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">receivedMsgJson</span><span class="p">)</span>
+            <span class="n">logMsg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message from portal: </span><span class="si">{</span> <span class="n">receivedMsg</span> <span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Launching </span><span class="si">{</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="si">}</span><span class="s1">...&#39;</span><span class="p">)</span>
+                <span class="n">envLocation</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span> <span class="n">mainEnvLocation</span> <span class="si">}</span><span class="s1">/</span><span class="si">{</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">envLocation</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;docker-compose up -d&#39;</span><span class="p">)</span>
+                <span class="n">runningENVs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">envLocation</span><span class="p">)</span>
+                <span class="n">returnMessage</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Containers in &quot;</span><span class="si">{</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="si">}</span><span class="s1">&quot; are starting up...&#39;</span>
+            <span class="k">elif</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;down&quot;</span><span class="p">:</span>
+                <span class="c1"># TODO: #5 Need to test if is actually running</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Stopping </span><span class="si">{</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="si">}</span><span class="s1">...&#39;</span><span class="p">)</span>
+                <span class="n">envLocation</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span> <span class="n">mainEnvLocation</span> <span class="si">}</span><span class="s1">/</span><span class="si">{</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">envLocation</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;docker-compose down&#39;</span><span class="p">)</span>
+                <span class="n">runningENVs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">envLocation</span><span class="p">)</span>
+                <span class="n">returnMessage</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Containers in &quot;</span><span class="si">{</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="si">}</span><span class="s1">&quot; have been stopped&#39;</span>
+            <span class="k">elif</span> <span class="n">receivedMsg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;libreTranslate&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Launching LibreTranslate&#39;</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">ltLocation</span><span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;docker-compose up -d&#39;</span><span class="p">)</span>
+                <span class="n">runningENVs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ltLocation</span><span class="p">)</span>
+                <span class="n">returnMessage</span> <span class="o">=</span> <span class="s1">&#39;Starting up libreTranslate&#39;</span>
+                <span class="c1"># TODO Need spin down function as well</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">returnMessage</span> <span class="o">=</span> <span class="s2">&quot;Message acknowledged (but no function called)&quot;</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">returnMessage</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>  <span class="c1"># send data to the client</span>
+
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># close the connection</span>
+    <span class="c1">#print(f&quot;exit flag is: { exitFlag[0] }&quot;)</span>
+    <span class="k">return</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>

@@ -19,11 +19,15 @@ templates = Jinja2Templates(directory='templates')
 
 
 def handler_stop_signals(signum, frame):
-    """Catch SIGTERM from 'docker-compose down', to gracefully close down all containers started by launcher
-        :param str signum: TBC
-        :param str frame: TBC
-        :returns: exit
+    """MKDOCS STD: Catch SIGTERM from 'docker-compose down', to gracefully close down all containers started by launcher
+        
+        Args:
+            signum: something to do with signum
+            frame: something to do with frame
+        Returns:
+            nothing -> system exits
     """
+
     global runningENVs, exitFlag
     logMsg("Closing down App")
     sys.exit(0)
@@ -35,6 +39,14 @@ signal.signal(signal.SIGTERM, handler_stop_signals)
 
 
 async def homepage(request):
+    """Home page
+
+        Args:
+            request: request results from client
+        Returns:
+            Home page
+    """
+
     template = "index.html"
     context = {"request": request}
     context['trans'] = trans
@@ -42,17 +54,25 @@ async def homepage(request):
 
 
 async def messages(request):
+    """messages test
+
+        Args:
+            request: request results from client
+        Returns:
+            test message
+    """
     template = "messages.html"
     context = {"request": request}
     return templates.TemplateResponse(template, context)
 
 
 async def envSelected(request):
-    """
-        Handles request to spin up a new ENV
-        :param dic request: the request sent by GET
-        :returns: new HTML
-        :rtype: HTML
+    """ENV selected function. Sends message to launcher container to start a ENV
+
+        Args:
+            request: request results from client
+        Returns:
+            message from launcher
     """
 
     template = "envSelected.html"
@@ -66,6 +86,14 @@ async def envSelected(request):
 
 
 async def stopEnv(request):
+    """Spin down ENV
+
+        Args:
+            request: request results from client
+        Returns:
+            return message from launcher container
+    """
+
     template = "stopEnv.html"
     context = {"request": request}
     launcherMsg = client_program('down', 'user1', 'ENV1')
@@ -74,6 +102,14 @@ async def stopEnv(request):
 
 
 async def settings(request):
+    """Loads settings html into main body of page
+
+        Args:
+            request: request results from client
+        Returns:
+            settings main body
+    """
+
     template = "settings.html"
     context = {"request": request}
     context['trans'] = trans
@@ -84,6 +120,14 @@ async def settings(request):
 
 
 async def changeLanguage(request):
+    """Changes the language and reloads the page in the new language
+
+        Args:
+            request: request results from client
+        Returns:
+            Home page in new language
+    """
+
     global translatedWords, language, trans
 
     template = "reload.html"
@@ -104,6 +148,14 @@ async def changeLanguage(request):
 
 
 async def network(request):
+    """Network page (just started on this work)
+
+        Args:
+            request: request results from client
+        Returns:
+            Home page
+    """
+
     template = "network.html"
     context = {"request": request}
     context['trans'] = trans
@@ -113,25 +165,41 @@ async def network(request):
 
 
 async def error(request):
+    """An example error. Switch the `debug` setting to see either tracebacks or 500 pages.
+
+        Args:
+            request: request results from client
+        Returns:
+            raises an error
+
     """
-    An example error. Switch the `debug` setting to see either tracebacks or 500 pages.
-    """
+
     raise RuntimeError("Oh no")
 
 
 async def not_found(request: Request, exc: HTTPException):
+    """404 page
+
+        Args:
+            request: request results from client
+        Returns:
+            Home page
     """
-    Return an HTTP 404 page.
-    """
+
     template = "404.html"
     context = {"request": request}
     return templates.TemplateResponse(template, context, status_code=404)
 
 
 async def server_error(request: Request, exc: HTTPException):
+    """Server error page
+
+        Args:
+            request: request results from client
+        Returns:
+            Home page
     """
-    Return an HTTP 500 page.
-    """
+
     template = "500.html"
     context = {"request": request}
     return templates.TemplateResponse(template, context, status_code=500)
@@ -163,14 +231,3 @@ app = Starlette(debug=True, routes=routes, exception_handlers=exception_handlers
 # Not currently used as cannot do reload with below method, only from command line
 if __name__ == "__main__":
     uvicorn.run(app, host='0.0.0.0', port=80)
-
-
-def testThing():
-    """ Test
-
-        :returns: 2
-
-        :rtype: int
-    """
-    print("test")
-    return 2

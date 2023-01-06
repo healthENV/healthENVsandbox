@@ -38,7 +38,7 @@ if os.path.exists(dictLocation):
 
 def findSentensesToTranslate():
     """Searches templates folder to find trans['someSentenseToTranslate']
-    
+
     """
 
     global dictionaryMultilingual
@@ -104,12 +104,16 @@ def updateDictionary():
 
 
 
-def translatedWords(language):
-    """ Translate words to diffent languages
-        :param str language: message to log
-        :returns: None
-        :rtype: None
+def translatedWords(language:str):
+    """Translate words to diffent languages
+        
+        Args:
+            language: message to log
+            frame: something to do with frame
+        Returns:
+            dictionarySingleLanguage
     """
+    
     #print(dictionaryMultilingual)
     #print('****')
     if language not in DEFINEDLANGUAGES:

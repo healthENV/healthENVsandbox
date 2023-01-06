@@ -37,9 +37,12 @@ def logMsg(message):
 
 def handler_stop_signals(signum, frame):
     """Catch SIGTERM from 'docker-compose down', to gracefully close down all containers started by launcher
-        :param str signum: TBC
-        :param str frame: TBC
-        :returns: exit
+        
+        Args:
+            signum: TBC
+            frame: TBC
+        Returns:
+            Exits
     """
     global runningENVs, exitFlag
     logMsg("Closing down routine...")
@@ -77,6 +80,12 @@ class ipcClass(threading.Thread):
 
 
 def ipcThread(server_socket):
+    """ Connects to server in another container
+
+        Args:
+            server_socket: socket to connect to server
+    
+    """
 
     global exitFlag, runningENVs
 
