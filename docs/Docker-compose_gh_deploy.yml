@@ -11,4 +11,5 @@ services:
       - ../:/project
     working_dir: /project/docs
     command:
-      sh -c "./gh-deploy.sh"
+      #sh -c "./gh-deploy.sh"
+      sh -c "while true; do moo; sleep 10; done"
