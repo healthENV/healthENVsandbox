@@ -10,6 +10,7 @@ services:
       - GH_token=${GH_token}
     volumes:
       - ../:/project
+      - $GITHUB_WORKSPACE:$GITHUB_WORKSPACE
     working_dir: /project/docs
     command:
       sh -c "./gh-deploy.sh"
