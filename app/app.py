@@ -17,6 +17,7 @@ trans = translatedWords(language)
 templates = Jinja2Templates(directory='templates')
 
 
+
 networks = {
     'hospitals': {
         1 : {
