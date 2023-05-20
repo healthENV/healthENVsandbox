@@ -9,4 +9,3 @@ git commit -a -m "$1"
 git push
 
 echo "Documents updated and file changes commited to GitHub";
-
